@@ -51,6 +51,24 @@ func printUsers(filter string) {
 	}
 }
 
+func userNames(filter string) []string {
+	filtered := make([]user, 0, 0)
+	for _, u := range users {
+		if strings.Contains(u.name, filter) {
+			filtered = append(filtered, u)
+		}
+	}
+
+	sort.Sort(byName(filtered))
+
+	result := make([]string, 0, 0)
+	for _, u := range users {
+		result = append(result, u.name)
+	}
+
+	return result
+}
+
 type byName []user
 
 func (s byName) Len() int {
